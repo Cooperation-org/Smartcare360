@@ -79,6 +79,39 @@ const schema = z.object({
     schedulePreferences: z.string(),
     culturalStandards: z.string(),
   }),
+
+  page6: z.object({
+    emergencyContact1: z.object({
+      name: z.string(),
+      phone: z.string(),
+      relationship: z.string(),
+    }),
+    emergencyContact2: z.object({
+      name: z.string(),
+      phone: z.string(),
+      relationship: z.string(),
+    }),
+    medicalContacts: z.object({
+      doctor: z.object({
+        name: z.string(),
+        phone: z.string(),
+      }),
+      pharmacy: z.object({
+        name: z.string(),
+        phone: z.string(),
+      }),
+      ambulanceService: z.object({
+        name: z.string(),
+        phone: z.string(),
+      }),
+    }),
+  }),
+
+  page7: z.object({}),
+
+  page8: z.object({}),
+
+  page9: z.object({}),
 });
 
 const defaultState = {
@@ -156,26 +189,63 @@ const defaultState = {
     schedulePreferences: undefined,
     culturalStandards: undefined,
   },
+
+  page6: {
+    emergencyContact1: {
+      name: undefined,
+      phone: undefined,
+      relationship: undefined,
+    },
+    emergencyContact2: {
+      name: undefined,
+      phone: undefined,
+      relationship: undefined,
+    },
+    medicalContacts: {
+      doctor: {
+        name: undefined,
+        phone: undefined,
+      },
+      pharmacy: {
+        name: undefined,
+        phone: undefined,
+      },
+      ambulanceService: {
+        name: undefined,
+        phone: undefined,
+      },
+    },
+  },
+
+  page7: {},
+
+  page8: {},
+
+  page9: {},
 };
 
 const state = reactive(defaultState);
 
-watch(
-  state,
-  (val) => {
-    localStorage.setItem(FORM_VALUE_LS_KEY, JSON.stringify(val));
-  },
-  { deep: true },
-);
+watch(state, saveToLS, { deep: true });
+
+function saveToLS(val: typeof state | typeof defaultState) {
+  localStorage.setItem(FORM_VALUE_LS_KEY, JSON.stringify(val));
+}
 
 export function useFormState() {
   onMounted(() => {
-    const found = localStorage.getItem(FORM_VALUE_LS_KEY);
-    if (found) {
-      const lsState = JSON.parse(found);
-      state.page1 = lsState.page1;
-      state.page2 = lsState.page2;
-    }
+    // const found = localStorage.getItem(FORM_VALUE_LS_KEY);
+    // if (found) {
+    //   const lsState = JSON.parse(found);
+    //   for (const key in state) {
+    //     if (lsState[key]) {
+    //       state[key as keyof typeof state] = lsState[key];
+    //     }
+    //   }
+    //   return
+    // }
+
+    // saveToLS(defaultState);
   });
 
   return { schema, state };
