@@ -13,5 +13,5 @@ const { onSubmit, state, schema } = defineProps<{
 </script>
 
 <template>
-  <UForm :schema="schema" :state="state" @submit.prevent="onSubmit">page 8</UForm>
+  <UForm :schema="schema" :state="state" @submit.prevent="onSubmit" class="grid gap-5 px-5 py-10"> page 8</UForm>
 </template>
