@@ -61,6 +61,24 @@ const schema = z.object({
       flowSheets: z.boolean(),
     }),
   }),
+
+  page5: z.object({
+    tasks: z.object({
+      bathing: z.boolean(),
+      dressing: z.boolean(),
+      eating: z.boolean(),
+      laundry: z.boolean(),
+      housekeeping: z.boolean(),
+      mealPreparation: z.boolean(),
+      mobility: z.boolean(),
+      shopping: z.boolean(),
+      socialActivities: z.boolean(),
+      toileting: z.boolean(),
+      transfer: z.boolean(),
+    }),
+    schedulePreferences: z.string(),
+    culturalStandards: z.string(),
+  }),
 });
 
 const defaultState = {
@@ -119,6 +137,24 @@ const defaultState = {
       physicianOrders: false,
       flowSheets: false,
     },
+  },
+
+  page5: {
+    tasks: {
+      bathing: false,
+      dressing: false,
+      eating: false,
+      laundry: false,
+      housekeeping: false,
+      mealPreparation: false,
+      mobility: false,
+      shopping: false,
+      socialActivities: false,
+      toileting: false,
+      transfer: false,
+    },
+    schedulePreferences: undefined,
+    culturalStandards: undefined,
   },
 };
 
