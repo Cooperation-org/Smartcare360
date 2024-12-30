@@ -31,6 +31,20 @@ const schema = z.object({
     receivedNoticeOfPrivacyPractices: z.boolean(),
     acknowledgeHIPAAPrivacyRules: z.boolean(),
   }),
+
+  page3: z.object({
+    shareWith: z.object({
+      parents: z.boolean(),
+      spouse: z.boolean(),
+      siblings: z.boolean(),
+      children: z.boolean(),
+      stepchildren: z.boolean(),
+      grandparents: z.boolean(),
+      auntsAndUncles: z.boolean(),
+    }),
+    otherShareWith: z.string(),
+    dontShareWith: z.string(),
+  }),
 });
 
 const defaultState = {
@@ -59,6 +73,20 @@ const defaultState = {
 
     receivedNoticeOfPrivacyPractices: false,
     acknowledgeHIPAAPrivacyRules: false,
+  },
+
+  page3: {
+    shareWith: {
+      parents: false,
+      spouse: false,
+      siblings: false,
+      children: false,
+      stepchildren: false,
+      grandparents: false,
+      auntsAndUncles: false,
+    },
+    otherShareWith: undefined,
+    dontShareWith: undefined,
   },
 };
 
