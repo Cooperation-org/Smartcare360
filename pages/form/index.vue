@@ -61,9 +61,9 @@ watch(page, (val) => {
       <FormPage4 v-if="page === 4" :state="state" :schema="schema" :on-submit="onSubmit" />
       <FormPage5 v-if="page === 5" :state="state" :schema="schema" :on-submit="onSubmit" />
       <FormPage6 v-if="page === 6" :state="state" :schema="schema" :on-submit="onSubmit" />
-      <!-- <FormPage7 v-if="page === 7" :state="state" :schema="schema" :on-submit="onSubmit" /> -->
-      <!-- <FormPage8 v-if="page === 8" :state="state" :schema="schema" :on-submit="onSubmit" /> -->
-      <!-- <FormPage9 v-if="page === 9" :state="state" :schema="schema" :on-submit="onSubmit" /> -->
+      <FormPage7 v-if="page === 7" :state="state" :schema="schema" :on-submit="onSubmit" />
+      <FormPage8 v-if="page === 8" :state="state" :schema="schema" :on-submit="onSubmit" />
+      <FormPage9 v-if="page === 9" :state="state" :schema="schema" :on-submit="onSubmit" />
     </FormContainer>
 
     <FormNavigation :init-page="page" :on-page-change="onPageChange" />

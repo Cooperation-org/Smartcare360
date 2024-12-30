@@ -243,9 +243,9 @@ export function useFormState() {
     //     }
     //   }
     //   return
+    // } else {
+    //   saveToLS(defaultState);
     // }
-
-    // saveToLS(defaultState);
   });
 
   return { schema, state };
