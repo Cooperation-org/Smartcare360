@@ -45,6 +45,22 @@ const schema = z.object({
     otherShareWith: z.string(),
     dontShareWith: z.string(),
   }),
+
+  page4: z.object({
+    releaseMedicalRecords: z.object({
+      historyAndPhysical: z.boolean(),
+      dischargeSummary: z.boolean(),
+      consults: z.boolean(),
+      progressNotes: z.boolean(),
+      laboratoryResults: z.boolean(),
+      radiologyResults: z.boolean(),
+      operativeReports: z.boolean(),
+      healthCareDirectives: z.boolean(),
+      medicationList: z.boolean(),
+      physicianOrders: z.boolean(),
+      flowSheets: z.boolean(),
+    }),
+  }),
 });
 
 const defaultState = {
@@ -87,6 +103,22 @@ const defaultState = {
     },
     otherShareWith: undefined,
     dontShareWith: undefined,
+  },
+
+  page4: {
+    releaseMedicalRecords: {
+      historyAndPhysical: false,
+      dischargeSummary: false,
+      consults: false,
+      progressNotes: false,
+      laboratoryResults: false,
+      radiologyResults: false,
+      operativeReports: false,
+      healthCareDirectives: false,
+      medicationList: false,
+      physicianOrders: false,
+      flowSheets: false,
+    },
   },
 };
 

@@ -30,6 +30,8 @@ function getHeader(page: number): string {
       return "Personal Information";
     case 3:
       return "Authorization to Share Information";
+    case 4:
+      return "Medical Records Release";
     default:
       return "";
   }
@@ -46,6 +48,7 @@ watch(page, (val) => {
       <FormPage1 v-if="page === 1" :state="state" :schema="schema" :on-submit="onSubmit" />
       <FormPage2 v-if="page === 2" :state="state" :schema="schema" :on-submit="onSubmit" />
       <FormPage3 v-if="page === 3" :state="state" :schema="schema" :on-submit="onSubmit" />
+      <FormPage4 v-if="page === 4" :state="state" :schema="schema" :on-submit="onSubmit" />
     </FormContainer>
 
     <FormNavigation :init-page="page" :on-page-change="onPageChange" />
