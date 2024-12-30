@@ -1,6 +1,8 @@
 <script setup lang="ts">
-const { onPageChange } = defineProps<{ onPageChange?: (num: number) => void }>();
-const page = ref(1);
+const { initPage, onPageChange } = defineProps<{ initPage?: number; onPageChange?: (num: number) => void }>();
+
+const page = ref(initPage ?? 1);
+
 const MAX_PAGE_COUNT = 9;
 
 function next() {

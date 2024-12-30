@@ -10,30 +10,12 @@ const { onSubmit, state, schema } = defineProps<{
   state: ReturnUseFormState["state"];
   schema: ReturnUseFormState["schema"];
 }>();
-
-const haveAndDontOptions = [
-  { value: true, label: "Have" },
-  { value: false, label: "Do Not Have" },
-];
 </script>
 
 <template>
   <UForm :schema="schema" :state="state" @submit.prevent="onSubmit" class="grid gap-5 px-5 py-10">
-    <URadioGroup
-      v-model="state.haveLivingWill"
-      name="have_living_will"
-      legend="Living Will"
-      :options="haveAndDontOptions"
-    />
-    <UFormGroup label="Upload Living Will Document">
-      <UInput
-        v-model="state.livingWill"
-        type="file"
-        name="living_will"
-        size="sm"
-        class="inline-block"
-        icon="i-heroicons-folder"
-      />
+    <UFormGroup label="Full Name">
+      <UInput v-model="state.page2.fullName" name="full_name" class="inline-block" />
     </UFormGroup>
   </UForm>
 </template>
