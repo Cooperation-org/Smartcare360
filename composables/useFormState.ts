@@ -42,6 +42,8 @@ const schema = z.object({
       grandparents: z.boolean(),
       auntsAndUncles: z.boolean(),
     }),
+    otherShareWith: z.string(),
+    dontShareWith: z.string(),
   }),
 });
 
@@ -83,6 +85,8 @@ const defaultState = {
       grandparents: false,
       auntsAndUncles: false,
     },
+    otherShareWith: undefined,
+    dontShareWith: undefined,
   },
 };
 
