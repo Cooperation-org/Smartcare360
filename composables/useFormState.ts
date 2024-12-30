@@ -1,6 +1,8 @@
 import { z } from "zod";
 import { LANGUAGES } from "~/constants/languages";
 
+const FORM_VALUE_LS_KEY = "form_value";
+
 const schema = z.object({
   page1: z.object({
     haveLivingWill: z.boolean(),
@@ -31,7 +33,7 @@ const schema = z.object({
   }),
 });
 
-const state = reactive({
+const defaultState = {
   page1: {
     haveLivingWill: false,
     livingWill: undefined,
@@ -58,16 +60,27 @@ const state = reactive({
     receivedNoticeOfPrivacyPractices: false,
     acknowledgeHIPAAPrivacyRules: false,
   },
-});
+};
+
+const state = reactive(defaultState);
 
 watch(
   state,
   (val) => {
-    localStorage.setItem("form_value", JSON.stringify(val));
+    localStorage.setItem(FORM_VALUE_LS_KEY, JSON.stringify(val));
   },
   { deep: true },
 );
 
 export function useFormState() {
+  onMounted(() => {
+    const found = localStorage.getItem(FORM_VALUE_LS_KEY);
+    if (found) {
+      const lsState = JSON.parse(found);
+      state.page1 = lsState.page1;
+      state.page2 = lsState.page2;
+    }
+  });
+
   return { schema, state };
 }
