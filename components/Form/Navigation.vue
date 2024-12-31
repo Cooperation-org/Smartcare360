@@ -26,6 +26,7 @@ go(0);
     <p class="col-start-2 text-center">{{ page }} of {{ MAX_PAGE_COUNT }}</p>
     <div class="flex flex-row-reverse col-start-3">
       <UButton v-if="page !== MAX_PAGE_COUNT" type="button" size="xl" @click="go(1)">Next</UButton>
+      <UButton v-else type="submit" size="xl">Submit</UButton>
     </div>
   </div>
 </template>
