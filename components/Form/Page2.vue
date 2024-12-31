@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { z } from "zod";
 import type { FormSubmitEvent } from "#ui/types";
-import { LANGUAGES } from "~/constants/languages";
+import { LANGUAGES } from "~/constants/constants";
 
 type ReturnUseFormState = ReturnType<typeof useFormState>;
 type Schema = z.output<ReturnUseFormState["schema"]>;

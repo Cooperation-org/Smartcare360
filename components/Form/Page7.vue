@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { z } from "zod";
 import type { FormSubmitEvent } from "#ui/types";
-import { RESPONSE_TIME_FOR_BACKUP } from "~/constants/languages";
+import { RESPONSE_TIME_FOR_BACKUP } from "~/constants/constants";
 
 type ReturnUseFormState = ReturnType<typeof useFormState>;
 type Schema = z.output<ReturnUseFormState["schema"]>;
