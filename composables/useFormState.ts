@@ -162,7 +162,23 @@ const schema = z.object({
     }),
   }),
 
-  page9: z.object({}),
+  page9: z.object({
+    careWorkerFamilyMember: z.boolean(),
+    careWorker: z.object({
+      fullName: z.string().optional(),
+      phoneNumber: z.string().optional(),
+    }),
+    serviceInformation: z.object({
+      startDate: z.string().date().optional(),
+      approvedWeekdaysHours: z.string().optional(),
+      approvedEveningsAndWeekendsHours: z.string().optional(),
+    }),
+    agreementConfirmation: z.object({
+      fulfillResponsibilities: z.literal(true),
+      understandResponsibilities: z.literal(true),
+      understandAZTenderHandsIsFiscalAgent: z.literal(true),
+    }),
+  }),
 });
 
 const defaultState = {
@@ -323,7 +339,23 @@ const defaultState = {
     },
   },
 
-  page9: {},
+  page9: {
+    careWorkerFamilyMember: undefined,
+    careWorker: {
+      fullName: undefined,
+      phoneNumber: undefined,
+    },
+    serviceInformation: {
+      startDate: undefined,
+      approvedWeekdaysHours: undefined,
+      approvedEveningsAndWeekendsHours: undefined,
+    },
+    agreementConfirmation: {
+      fulfillResponsibilities: false,
+      understandResponsibilities: false,
+      understandAZTenderHandsIsFiscalAgent: false,
+    },
+  },
 };
 
 const state = reactive(defaultState);
@@ -335,19 +367,19 @@ function saveToLS(val: typeof state | typeof defaultState) {
 }
 
 export function useFormState() {
-  // onMounted(() => {
-  //   const found = localStorage.getItem(FORM_VALUE_LS_KEY);
-  //   if (found) {
-  //     const lsState = JSON.parse(found);
-  //     for (const key in state) {
-  //       if (lsState[key]) {
-  //         state[key as keyof typeof state] = lsState[key];
-  //       }
-  //     }
-  //   } else {
-  //     saveToLS(defaultState);
-  //   }
-  // });
+  onMounted(() => {
+    const found = localStorage.getItem(FORM_VALUE_LS_KEY);
+    if (found) {
+      const lsState = JSON.parse(found);
+      for (const key in state) {
+        if (lsState[key]) {
+          state[key as keyof typeof state] = lsState[key];
+        }
+      }
+    } else {
+      saveToLS(defaultState);
+    }
+  });
 
   return { schema, state };
 }
