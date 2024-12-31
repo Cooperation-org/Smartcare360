@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { LANGUAGES, RESPONSE_TIME_FOR_BACKUP } from "~/constants/languages";
+import { LANGUAGES, RESPONSE_TIME_FOR_BACKUP } from "~/constants/constants";
 
 const FORM_VALUE_LS_KEY = "form_value";
 
@@ -125,7 +125,42 @@ const schema = z.object({
     ),
   }),
 
-  page8: z.object({}),
+  page8: z.object({
+    electricalSafety: z.object({
+      groundFault: z.boolean(),
+      electricalCords: z.boolean(),
+      switchesHaveCovers: z.boolean(),
+    }),
+    buildingServices: z.object({
+      heat: z.boolean().optional(),
+      sewer: z.boolean().optional(),
+      phone: z.boolean().optional(),
+      water: z.boolean().optional(),
+      electricity: z.boolean().optional(),
+    }),
+    safetyEquipment: z.object({
+      smokeDetector: z.boolean().optional(),
+      fireExtinguisher: z.boolean().optional(),
+      flashlight: z.boolean().optional(),
+    }),
+    fireSafety: z.object({
+      notifiedFireDepartment: z.boolean().or(z.literal("N/A")).optional(),
+      emergencyNumber: z.string(),
+    }),
+    personalSafety: z.object({
+      safeParking: z.boolean().optional(),
+      parkingLocation: z.string().optional(),
+      risksWithinResidence: z.string().optional(),
+      howMinimizeRisks: z.string().optional(),
+      petIssues: z.string().optional(),
+    }),
+    walkways: z.object({
+      clear: z.boolean(),
+      safe: z.boolean(),
+      maintained: z.boolean(),
+      hasHandrails: z.boolean(),
+    }),
+  }),
 
   page9: z.object({}),
 });
@@ -251,7 +286,42 @@ const defaultState = {
     ],
   },
 
-  page8: {},
+  page8: {
+    electricalSafety: {
+      groundFault: false,
+      electricalCords: false,
+      switchesHaveCovers: false,
+    },
+    buildingServices: {
+      heat: false,
+      sewer: false,
+      phone: false,
+      water: false,
+      electricity: false,
+    },
+    safetyEquipment: {
+      smokeDetector: false,
+      fireExtinguisher: false,
+      flashlight: false,
+    },
+    fireSafety: {
+      notifiedFireDepartment: undefined,
+      emergencyNumber: undefined,
+    },
+    personalSafety: {
+      safeParking: undefined,
+      parkingLocation: undefined,
+      risksWithinResidence: undefined,
+      howMinimizeRisks: undefined,
+      petIssues: undefined,
+    },
+    walkways: {
+      clear: false,
+      safe: false,
+      maintained: false,
+      hasHandrails: false,
+    },
+  },
 
   page9: {},
 };
@@ -265,20 +335,19 @@ function saveToLS(val: typeof state | typeof defaultState) {
 }
 
 export function useFormState() {
-  onMounted(() => {
-    // const found = localStorage.getItem(FORM_VALUE_LS_KEY);
-    // if (found) {
-    //   const lsState = JSON.parse(found);
-    //   for (const key in state) {
-    //     if (lsState[key]) {
-    //       state[key as keyof typeof state] = lsState[key];
-    //     }
-    //   }
-    //   return
-    // } else {
-    //   saveToLS(defaultState);
-    // }
-  });
+  // onMounted(() => {
+  //   const found = localStorage.getItem(FORM_VALUE_LS_KEY);
+  //   if (found) {
+  //     const lsState = JSON.parse(found);
+  //     for (const key in state) {
+  //       if (lsState[key]) {
+  //         state[key as keyof typeof state] = lsState[key];
+  //       }
+  //     }
+  //   } else {
+  //     saveToLS(defaultState);
+  //   }
+  // });
 
   return { schema, state };
 }
