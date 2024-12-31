@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { LANGUAGES } from "~/constants/languages";
+import { LANGUAGES, RESPONSE_TIME_FOR_BACKUP } from "~/constants/languages";
 
 const FORM_VALUE_LS_KEY = "form_value";
 
@@ -107,7 +107,23 @@ const schema = z.object({
     }),
   }),
 
-  page7: z.object({}),
+  page7: z.object({
+    preferredResponseTimeForBackup: z.enum(RESPONSE_TIME_FOR_BACKUP.map((x) => x.value) as [string, ...string[]]),
+    backupProviders: z.object({
+      contactProviderAgency: z.string(),
+      contactCaseManager: z.string(),
+      contactAHCCCS: z.string(),
+      familyOrFriendsProvideCare: z.string(),
+    }),
+    backupContacts: z.array(
+      z.object({
+        name: z.string(),
+        phone: z.string(),
+        relationship: z.string(),
+        daysTimes: z.string(),
+      }),
+    ),
+  }),
 
   page8: z.object({}),
 
@@ -217,7 +233,23 @@ const defaultState = {
     },
   },
 
-  page7: {},
+  page7: {
+    preferredResponseTimeForBackup: undefined,
+    backupProviders: {
+      contactProviderAgency: undefined,
+      contactCaseManager: undefined,
+      contactAHCCCS: undefined,
+      familyOrFriendsProvideCare: undefined,
+    },
+    backupContacts: [
+      {
+        name: undefined,
+        phone: undefined,
+        relationship: undefined,
+        daysTimes: undefined,
+      },
+    ],
+  },
 
   page8: {},
 
