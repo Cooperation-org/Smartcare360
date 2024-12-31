@@ -1,7 +1,11 @@
 <script setup lang="ts">
 const MAX_PAGE_COUNT = 9;
 
-const { initPage, onPageChange } = defineProps<{ initPage?: number; onPageChange?: (num: number) => void }>();
+const { initPage, onPageChange, form } = defineProps<{
+  initPage?: number;
+  onPageChange?: (num: number) => void;
+  form: HTMLFormElement | null;
+}>();
 
 const page = ref(initPage ? parseInt(initPage.toString(), 10) : 1);
 
@@ -14,6 +18,10 @@ function go(delta: number) {
 
 // To trigger the onPageChange if it exists and sync the parent with the component
 go(0);
+
+function onSubmit() {
+  if (form) form.submit();
+}
 </script>
 
 <template>
@@ -26,7 +34,7 @@ go(0);
     <p class="col-start-2 text-center">{{ page }} of {{ MAX_PAGE_COUNT }}</p>
     <div class="flex flex-row-reverse col-start-3">
       <UButton v-if="page !== MAX_PAGE_COUNT" type="button" size="xl" @click="go(1)">Next</UButton>
-      <UButton v-else type="submit" size="xl">Submit</UButton>
+      <UButton v-else type="submit" size="xl" @click="onSubmit">Submit</UButton>
     </div>
   </div>
 </template>

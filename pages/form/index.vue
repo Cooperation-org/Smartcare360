@@ -4,6 +4,8 @@ import type { FormSubmitEvent } from "#ui/types";
 
 const { schema, state } = useFormState();
 
+const form = ref<HTMLFormElement | null>(null);
+
 const route = useRoute();
 const pageQuery = route.query.page;
 
@@ -55,17 +57,19 @@ watch(page, (val) => {
 <template>
   <UContainer class="my-10">
     <FormContainer :second-header="secondHeader">
-      <FormPage1 v-if="page === 1" :state="state" :schema="schema" :on-submit="onSubmit" />
-      <FormPage2 v-if="page === 2" :state="state" :schema="schema" :on-submit="onSubmit" />
-      <FormPage3 v-if="page === 3" :state="state" :schema="schema" :on-submit="onSubmit" />
-      <FormPage4 v-if="page === 4" :state="state" :schema="schema" :on-submit="onSubmit" />
-      <FormPage5 v-if="page === 5" :state="state" :schema="schema" :on-submit="onSubmit" />
-      <FormPage6 v-if="page === 6" :state="state" :schema="schema" :on-submit="onSubmit" />
-      <FormPage7 v-if="page === 7" :state="state" :schema="schema" :on-submit="onSubmit" />
-      <FormPage8 v-if="page === 8" :state="state" :schema="schema" :on-submit="onSubmit" />
-      <FormPage9 v-if="page === 9" :state="state" :schema="schema" :on-submit="onSubmit" />
+      <UForm ref="form" :state="state" @submit.prevent="onSubmit" class="grid gap-5 px-5 py-10">
+        <FormPage1 v-if="page === 1" :state="state" />
+        <FormPage2 v-if="page === 2" :state="state" />
+        <FormPage3 v-if="page === 3" :state="state" />
+        <FormPage4 v-if="page === 4" :state="state" />
+        <FormPage5 v-if="page === 5" :state="state" />
+        <FormPage6 v-if="page === 6" :state="state" />
+        <FormPage7 v-if="page === 7" :state="state" />
+        <FormPage8 v-if="page === 8" :state="state" />
+        <FormPage9 v-if="page === 9" :state="state" />
+      </UForm>
     </FormContainer>
 
-    <FormNavigation :init-page="page" :on-page-change="onPageChange" />
+    <FormNavigation :init-page="page" :on-page-change="onPageChange" :form="form" />
   </UContainer>
 </template>
